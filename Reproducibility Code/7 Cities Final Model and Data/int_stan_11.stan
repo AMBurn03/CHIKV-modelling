@@ -150,7 +150,7 @@ generated quantities{
   array[N] int<lower=0> y_pred_adjust_sm = binomial_rng(N_sm, p_adj_sm);
   // array[N] int<lower=0> y_pred_naive_sm = binomial_rng(N_sm, inv_logit(p_sm));
   // rp
-  array[N] int<lower=0> y_pred_rp = neg_binomial_2_log_rng(log_mu_rp, inv(phi_rp));
+  array[N] int<lower=0> y_pred_rp = neg_binomial_2_log_rng(log_mu_rp, phi_rp);
   // array[N] int<lower=0> y_pred_rp = poisson_log_rng(log_mu_rp);
   vector<lower=0>[N] rho_rp = inv_logit(logit_rho_rp);
   }

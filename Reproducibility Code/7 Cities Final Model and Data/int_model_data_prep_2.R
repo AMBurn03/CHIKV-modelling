@@ -1,11 +1,11 @@
 ### integrated model data prep
 set_cmdstan_path(file.path("C:/Users/antho/OneDrive - Imperial College London/Dissertation/Modelling", "cmdstan-2.36.0"))
 ## load data:
-data.dir <- "C:/Users/antho/OneDrive - Imperial College London/Dissertation/Reproducability Code/7 Cities Final Model and Data"
-out.dir <- "C:/Users/antho/OneDrive - Imperial College London/Dissertation/Reproducability Code/7 Cities Final Model and Data"
-rp_key <- readRDS(file.path(data.dir,"rp_key.rds"))
+data.dir <- "C:/Users/antho/OneDrive - Imperial College London/Dissertation/Reproducibility Code/7 Cities Final Model and Data"
+out.dir <- "C:/Users/antho/OneDrive - Imperial College London/Dissertation/Reproducibility Code/7 Cities Final Model and Data"
+rp_key <- readRDS("C:/Users/antho/OneDrive - Imperial College London/Dissertation/Reproducibility Code/7 Cities Final Model and Data/rp_key.rds")
 rep_model_data <- readRDS("C:/Users/antho/OneDrive - Imperial College London/Dissertation/Modelling/Reported Case Modelling/rep_model_input_data.rds")
-load(paste(data.dir,"/full_data.RData",sep=""))
+load("C:/Users/antho/OneDrive - Imperial College London/Dissertation/Reproducibility Code/7 Cities Final Model and Data/full_data.RData")
 full_data <- full_data %>% 
   mutate(CHKG.1_INTERPRETATION = case_when(
     CHKG.1_INTERPRETATION == "Positivo" ~ 1,

@@ -5,7 +5,7 @@ out.dir <- "C:/Users/antho/OneDrive - Imperial College London/Dissertation/Repro
 data_key <- readRDS(file.path(out.dir, "int_model_2_key.rds"))
 stan_data <- readRDS(file.path(out.dir, "integrated_inputdata.rds"))
 
-int_model_compiled <- cmdstan_model(file.path(out.dir, "int_stan_11.stan"))
+int_model_compiled <- cmdstan_model(file.path(out.dir, "int_full_stan.stan"))
 
   # sample
 int_fit <- int_model_compiled$sample(
@@ -53,9 +53,19 @@ theme_bw()+
        x = "City",
        title = "Each City's Reported Case Rate (95% Credible Intervals)")+
   scale_y_continuous(breaks = seq(0, 1, by = 0.01))+  # From 0 to 1 by 0.01
-  theme(axis.text.x = element_text(angle = 45,vjust = 1,hjust = 1, size = 10),
-        axis.text.y = element_text(size = 10),
-        axis.title=element_text(size=10, face="bold"))
+  theme(  # Main title size and face (bold)
+    plot.title = element_text(size = 16, face = "bold"),
+    
+    # Axis titles size and face
+    axis.title.x = element_text(size = 16, face = "bold"),
+    axis.title.y = element_text(size = 16, face = "bold"),
+    
+    # Axis text (tick labels)
+    axis.text.x = element_text(angle = 60, vjust = 1, hjust = 1, size = 12),
+    axis.text.y = element_text(size = 14),# Legend settings
+    legend.text = element_text(size = 14),           # Legend item text
+    legend.title = element_text(size = 16, face = "bold"),
+    strip.text = element_text(size=13, face = "bold")) 
 
 
 
@@ -73,15 +83,25 @@ ggplot(data = plot_df[85:168,], aes(x = CITY))+
                    middle = N_med_rp, upper = N_q95_rp, ymax = N_q95_rp), stat = "identity") + geom_point(aes(y = N_POS_rp), colour = plot_df[85:168,]$IN_PPI)+theme_bw()+
   labs(y = "Reported Case Count",
        title = "90% PPI Check for Reported Cases (7 cities, 2024 Only, Reporting Rate Varying by City Negative-Binomial)")+
-  theme(axis.text.x = element_text(angle = 45,vjust = 1,hjust = 1, size = 10),
-        axis.text.y = element_text(size = 10),
-        axis.title=element_text(size=10, face="bold"))
+  theme(  # Main title size and face (bold)
+    plot.title = element_text(size = 16, face = "bold"),
+    
+    # Axis titles size and face
+    axis.title.x = element_text(size = 16, face = "bold"),
+    axis.title.y = element_text(size = 16, face = "bold"),
+    
+    # Axis text (tick labels)
+    axis.text.x = element_text(angle = 60, vjust = 1, hjust = 1, size = 12),
+    axis.text.y = element_text(size = 14),# Legend settings
+    legend.text = element_text(size = 14),           # Legend item text
+    legend.title = element_text(size = 16, face = "bold"),
+    strip.text = element_text(size=13, face = "bold"))
 table(plot_df$IN_PPI)
 
 
 
 ##### sm PPI check
-tmp <- int_fit$summary(variable = "y_pred_adjust_sm")
+tmp <- int_fit$summary(variable = "y_pred_adj_sm")
 plot_df <- data_key %>% 
   mutate(N_med_rp = tmp$median,
          N_q5_rp = tmp$q5,
@@ -95,9 +115,19 @@ ggplot(data = plot_df[85:168,], aes(x = CITY))+
                    middle = N_med_rp, upper = N_q95_rp, ymax = N_q95_rp), stat = "identity") + geom_point(aes(y = N_POSITIVE), colour = plot_df[85:168,]$IN_PPI)+theme_bw()+
   labs(y = "Seropositive Count",
        title = "90% PPI Check for Seroprevalence Cases (Final Model, 7 cities, 2024 Only)")+
-  theme(axis.text.x = element_text(angle = 45,vjust = 1,hjust = 1, size = 10),
-        axis.text.y = element_text(size = 10),
-        axis.title=element_text(size=10, face="bold"))
+  theme(  # Main title size and face (bold)
+    plot.title = element_text(size = 16, face = "bold"),
+    
+    # Axis titles size and face
+    axis.title.x = element_text(size = 16, face = "bold"),
+    axis.title.y = element_text(size = 16, face = "bold"),
+    
+    # Axis text (tick labels)
+    axis.text.x = element_text(angle = 60, vjust = 1, hjust = 1, size = 12),
+    axis.text.y = element_text(size = 14),# Legend settings
+    legend.text = element_text(size = 14),           # Legend item text
+    legend.title = element_text(size = 16, face = "bold"),
+    strip.text = element_text(size=13, face = "bold")) 
 table(plot_df$IN_PPI)
 
 
@@ -133,9 +163,19 @@ ggplot(data = plot_df, aes(x = CITY))+
        x = "City",
        title = "Each City's Reported Case Rate (90% Credible Intervals)")+
   scale_y_continuous(breaks = seq(0, 1, by = 0.01))+  # From 0 to 1 by 0.01
-  theme(axis.text.x = element_text(angle = 45,vjust = 1,hjust = 1, size = 10),
-        axis.text.y = element_text(size = 10),
-        axis.title=element_text(size=10, face="bold"))
+  theme(  # Main title size and face (bold)
+    plot.title = element_text(size = 16, face = "bold"),
+    
+    # Axis titles size and face
+    axis.title.x = element_text(size = 16, face = "bold"),
+    axis.title.y = element_text(size = 16, face = "bold"),
+    
+    # Axis text (tick labels)
+    axis.text.x = element_text(angle = 60, vjust = 1, hjust = 1, size = 12),
+    axis.text.y = element_text(size = 14),# Legend settings
+    legend.text = element_text(size = 14),           # Legend item text
+    legend.title = element_text(size = 16, face = "bold"),
+    strip.text = element_text(size=13, face = "bold")) 
 
 
 
@@ -196,6 +236,16 @@ ggplot(data = plot_df, aes(x = CITY))+
        x = "City (date)",
        title = "Each City (and Date's) Reported Case Rate (90% EQT Credible Intervals)")+
   scale_y_continuous(breaks = seq(0, 1, by = 0.01))+  # From 0 to 1 by 0.01
-  theme(axis.text.x = element_text(angle = 45,vjust = 1,hjust = 1, size = 10),
-        axis.text.y = element_text(size = 10),
-        axis.title=element_text(size=10, face="bold"))
+  theme(  # Main title size and face (bold)
+    plot.title = element_text(size = 16, face = "bold"),
+    
+    # Axis titles size and face
+    axis.title.x = element_text(size = 16, face = "bold"),
+    axis.title.y = element_text(size = 16, face = "bold"),
+    
+    # Axis text (tick labels)
+    axis.text.x = element_text(angle = 60, vjust = 1, hjust = 1, size = 12),
+    axis.text.y = element_text(size = 14),# Legend settings
+    legend.text = element_text(size = 14),           # Legend item text
+    legend.title = element_text(size = 16, face = "bold"),
+    strip.text = element_text(size=13, face = "bold")) 
