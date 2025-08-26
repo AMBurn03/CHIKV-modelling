@@ -17,7 +17,8 @@ simple_data <- readRDS( file.path(data.dir, "simple_inputdata.rds") )
 # simple_model_compiled <- cmdstan_model(file.path(out.dir, "simple_stan_sm_cut_final.stan"))
 # simple_model_compiled <- cmdstan_model(file.path(out.dir, "simple_saocarlos_stan.stan"))
 # simple_model_compiled <- cmdstan_model(file.path(out.dir, "simple_stan_8_test.stan"))
-simple_model_compiled <- cmdstan_model(file.path(out.dir, "simple_stan_8_tmp.stan"))
+# simple_model_compiled <- cmdstan_model(file.path(out.dir, "simple_stan_8.stan"))
+simple_model_compiled <- cmdstan_model(file.path(out.dir, "simple_stan_8.stan"))
 
 # simple_model_compiled <- cmdstan_model(file.path(out.dir, "sm_extrapolate_stan_1.stan"))
 # simple_model_compiled <- cmdstan_model(file.path(out.dir, "simple_stan_4.stan"))
@@ -40,6 +41,10 @@ simple_fit <- simple_model_compiled$sample(
 simple_data_rp <- simple_data
 tmp <- summary(simple_fit$draws(variables = "pi_adj_sm"))
 
+### analyse model fit with simple_diagnosis.R
+
+
+#### CUTTING STUFF.... IGNORE
 get_Beta_Parameters <- function(mu, sd){
   var <- sd^2
   alpha <- ((1-mu)/ var - (1/mu))* (mu^2)
